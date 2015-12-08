@@ -95,7 +95,7 @@ define('IN_INDEX', true);
 					$result = $stmt->execute()->fetchArray();
 					
 					echo
-						'<div class="col-md-6">'
+						'<div class="col-md-6"><h1>&nbsp;</h1>'
 							.$result[0].
 						'</div>';
 						
