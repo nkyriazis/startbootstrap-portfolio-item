@@ -1,3 +1,8 @@
+<?php
+include "config.php";
+
+define('IN_INDEX', true);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+    <title><?php echo $name;?> - <?php echo $site_type;?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,19 +44,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="./">About</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="./?id=publications">Publications</a>
                     </li>
                 </ul>
             </div>
@@ -63,35 +64,18 @@
     <!-- Page Content -->
     <div class="container">
 
-        <!-- Portfolio Item Heading -->
+        <!-- <?php echo $name;?> Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Portfolio Item
-                    <small>Item Subheading</small>
+                <h1 class="page-header"><?php echo $name;?><br>
+                    <small><?php echo $site_type;?></small>
                 </h1>
             </div>
         </div>
         <!-- /.row -->
-
-        <!-- Portfolio Item Row -->
+		
         <div class="row">
-
-            <div class="col-md-8">
-                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-            </div>
-
-            <div class="col-md-4">
-                <h3>Project Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                <h3>Project Details</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
-            </div>
-
+					<?php include "${request}.php";?>
         </div>
         <!-- /.row -->
 
@@ -99,33 +83,26 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <h3 class="page-header">Related Projects</h3>
+                <h3 class="page-header">Research</h3>
             </div>
 
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+						<?php foreach($research as $id => $data)
+						{
+							if($id != $request)
+							{
+							$tr = ['theid' => $id, 'theimg' => $data[1], 'thetitle' => $data[0]];
+			echo strtr(
+            '<div class="col-sm-3 col-xs-6">
+                <a href="./?id=theid">
+					<div>
+						<img class="img-responsive portfolio-item" src="theimg" alt="">
+						<h4 class="overlay">thetitle</h4>
+					</div>
                 </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
+            </div>', $tr);
+						}
+						}
+			?>
         </div>
         <!-- /.row -->
 
@@ -135,7 +112,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; <?php echo $name; ?> 2015. Site was based on the <a href="https://github.com/IronSummitMedia/startbootstrap-portfolio-item">Bootstrap-Portfolio Item theme</a>. Citations were printed using <a href="https://github.com/monperrus/bibtexbrowser">bibtexbrowser</a>.</p>
                 </div>
             </div>
             <!-- /.row -->
