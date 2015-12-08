@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+require_once('bib.inc.php');
 
 define('IN_INDEX', true);
 ?>
@@ -75,7 +76,64 @@ define('IN_INDEX', true);
         <!-- /.row -->
 		
         <div class="row">
-					<?php include "${request}.php";?>
+			<?php
+				if ($request == 'about' || $request == 'publications')
+				{
+					include $request.'.php';
+				}
+				else
+				{
+					$stmt = $content->prepare('select value from research, title where research.key = title.key and title.key="'.$request.'"');
+					$result = $stmt->execute()->fetchArray();
+					
+					echo
+						'<div class="col-md-12">
+							<h1>'.$result[0].'</h>
+						</div>';
+					
+					$stmt = $content->prepare('select value from research, banner where research.key = banner.key and banner.key="'.$request.'"');
+					$result = $stmt->execute()->fetchArray();
+					
+					echo
+						'<div class="col-md-6">'
+							.$result[0].
+						'</div>';
+						
+					$stmt = $content->prepare('select value from research, abstract where research.key = abstract.key and abstract.key="'.$request.'"');
+					$result = $stmt->execute()->fetchArray();
+					
+					echo
+						'<div class="col-md-6">
+							<h2>Abstract</h2>
+							<p>'.stripslashes($result[0]).'</p>
+						</div>';
+						
+					$stmt = $content->prepare('select title, value from research, content where research.key = content.key and content.key="'.$request.'"');
+					$result = $stmt->execute();
+					
+					while ($entry = $result->fetchArray())
+					{
+						echo
+							'<div class="col-md-6">
+								<h2>'.$entry[0].'</h2>'
+								.$entry[1].
+							'</div>';
+					}
+					
+					echo
+						'<div class="col-md-12">
+							<h2>References</h2>';
+							
+						$stmt = $content->prepare('select value from research, "references" where research.key = "references".key and "references".key="'.$request.'"');
+						$result = $stmt->execute();
+						while ($entry = $result->fetchArray())
+						{
+							echo $db->getEntryByKey($entry[0])->toHTML();
+						}
+					echo
+						'</div>';
+				}
+			?>
         </div>
         <!-- /.row -->
 
@@ -85,24 +143,23 @@ define('IN_INDEX', true);
             <div class="col-lg-12">
                 <h3 class="page-header">Research</h3>
             </div>
-
-						<?php foreach($research as $id => $data)
-						{
-							if($id != $request)
-							{
-							$tr = ['theid' => $id, 'theimg' => $data[1], 'thetitle' => $data[0]];
-			echo strtr(
-            '<div class="col-sm-3 col-xs-6">
-                <a href="./?id=theid">
-					<div>
-						<img class="img-responsive portfolio-item" src="theimg" alt="">
-						<h4 class="overlay">thetitle</h4>
-					</div>
-                </a>
-            </div>', $tr);
-						}
-						}
-			?>
+				<?php
+					$stmt = $content->prepare('select research.key, thumb.value, title.value from research, title, thumb where research.key = title.key and title.key = thumb.key');
+					$result = $stmt->execute();
+					
+					while ($row = $result->fetchArray())
+					{
+						echo
+							'<div class="col-sm-3 col-xs-6">
+								<a href="./?id='.$row[0].'">
+									<div>
+										<img class="img-responsive portfolio-item" src="'.$row[1].'" alt="">
+										<h4 class="overlay">'.$row[2].'</h4>
+									</div>
+								</a>
+							</div>';
+					}
+				?>
         </div>
         <!-- /.row -->
 
