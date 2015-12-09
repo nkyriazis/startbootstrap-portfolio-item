@@ -1,4 +1,5 @@
 <div class="col-md-2">
+    <h2>&nbsp;</h2>
 	<img class="img-responsive" src="media/avatar.jpg" alt="">
 </div>
 
