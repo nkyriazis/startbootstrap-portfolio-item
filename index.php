@@ -144,7 +144,7 @@ define('IN_INDEX', true);
                 <h3 class="page-header">Research</h3>
             </div>
 				<?php
-					$stmt = $content->prepare('select research.key, thumb.value, title.value from research, title, thumb where research.key = title.key and title.key = thumb.key');
+					$stmt = $content->prepare('select research.key, thumb.value, title.value from research, title, thumb where research.key = title.key and title.key = thumb.key order by research."order"');
 					$result = $stmt->execute();
 					
 					while ($row = $result->fetchArray())
