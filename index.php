@@ -120,10 +120,12 @@ define('IN_INDEX', true);
 							
 						$stmt = $content->prepare('select value from "references" where "references".key="'.$request.'"');
 						$result = $stmt->execute();
+                        $entries = array();
 						while ($entry = $result->fetchArray())
 						{
-							echo $db->getEntryByKey($entry['value'])->toHTML();
+                            array_push($entries, $db->getEntryByKey($entry['value']));
 						}
+                        display_bib($entries);
 					echo
 						'</div>';
 				}

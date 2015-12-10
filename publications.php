@@ -8,10 +8,7 @@ ini_set('display_errors', 1);
 	<h2>Publications</h2>
 	<div class="newspaper col-md-12">
 	<?php
-		// printing all 2014 entries
-        $d = new AcademicDisplay();
-        $d->setDB($db);
-        $d->display();
+        display_bib($db->bibdb);
 	?>
 	</div>
 </div>
