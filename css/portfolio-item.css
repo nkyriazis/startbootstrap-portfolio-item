@@ -56,3 +56,11 @@ p {
     content:"\a";
     white-space: pre;
 }
+
+.bibcategory {
+    font-weight:bold;
+}
+
+.count {
+    display:none;
+}
