@@ -910,8 +910,8 @@ function char2html_case_sensitive($line,$latexmodifier,$char,$entitiyfragment) {
 (I still look for a comprehensive translation table from late chars to html, better than [[http://isdc.unige.ch/Newsletter/help.html]])
  */
 function latex2html($line) {
-
-  $line = preg_replace('/([^\\\\])~/','\\1&nbsp;', $line);
+  // The next line removes ~ from the links and messes it up for me!
+  // $line = preg_replace('/([^\\\\])~/','\\1&nbsp;', $line);
 
   $line = str_replace('---','&mdash;',$line);
   $line = str_replace('--','&ndash;',$line);
