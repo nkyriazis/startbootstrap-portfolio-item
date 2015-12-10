@@ -911,7 +911,7 @@ function char2html_case_sensitive($line,$latexmodifier,$char,$entitiyfragment) {
  */
 function latex2html($line) {
 
-  $line = preg_replace('/([^\\\\])~/','\\1&nbsp;', $line);
+  $line = preg_replace('/([^\\\\])/','\\1&nbsp;', $line);
 
   $line = str_replace('---','&mdash;',$line);
   $line = str_replace('--','&ndash;',$line);
