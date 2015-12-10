@@ -52,9 +52,8 @@ p {
 .bibtitle { font-weight:bold; }
 .bibauthor { font-style: italic; }
 
-.bibtitle:after {
-    content:"\a";
-    white-space: pre;
+.bibtitle {
+    display:inline-flex;
 }
 
 .bibcategory {
