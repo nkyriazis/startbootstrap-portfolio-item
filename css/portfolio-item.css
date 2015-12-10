@@ -53,7 +53,7 @@ p {
 .bibauthor { font-style: italic; }
 
 .bibtitle {
-    display:inline-flex;
+    display:block;
 }
 
 .bibcategory {
