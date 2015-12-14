@@ -126,7 +126,7 @@ define('IN_INDEX', true);
 					}
 					
 					echo
-						'<div class="row">
+						'<div class="row col-md-12">
 							<h2>References</h2>';
 							
 						$stmt = $content->prepare('select value from "references" where "references".key="'.$request.'"');
