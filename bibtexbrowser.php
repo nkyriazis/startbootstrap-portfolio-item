@@ -1813,7 +1813,7 @@ function bib2links_default(&$bibentry) {
 /** prints the header of a layouted HTML, depending on BIBTEXBROWSER_LAYOUT e.g. <TABLE> */
 function print_header_layout() {
   if (BIBTEXBROWSER_LAYOUT == 'list') return;
-  echo '<' . get_HTML_tag_for_layout() . ' class="result">'."\n";
+  echo '<' . get_HTML_tag_for_layout() . ' class="result col-md-6">'."\n";
 }
 
 /** prints the footer of a layouted HTML, depending on BIBTEXBROWSER_LAYOUT e.g. </TABLE> */
@@ -3007,7 +3007,7 @@ class SimpleDisplay  {
 	  $year = $bib->getYear();
 	else
 	  $year = __('No date');
-        return $string.'<h'.$this->headingLevel.'>'.$year."</h".$this->headingLevel.">\n<ul class=\"result\">\n";
+        return $string.'<h'.$this->headingLevel.' class="col-md-12">'.$year."</h".$this->headingLevel.">\n<ul class=\"result\">\n";
         break;
       default:
         return '';
@@ -3063,7 +3063,7 @@ class AcademicDisplay  {
   function search2html($query, $title) {
     $entries = $this->db->multisearch($query);
     if (count($entries)>0) {
-      echo "\n".'<div class="sheader">'.$title.'</div>'."\n";
+      echo "\n".'<div class="sheader col-md-12">'.$title.'</div>'."\n";
     }
     $display = createBasicDisplay();
     $display->setEntries($entries);
