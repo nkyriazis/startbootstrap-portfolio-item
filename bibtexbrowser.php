@@ -1579,7 +1579,7 @@ class BibEntry {
       $result = '';
       switch(BIBTEXBROWSER_LAYOUT) { // open row
         case 'list':
-          $result .= '<li class="bibline">';
+          $result .= '<li class="bibline col-md-6">';
           break;
         case 'ordered_list':
           $result .= '<li class="bibline">';
